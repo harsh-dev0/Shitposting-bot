@@ -9,7 +9,8 @@ const groq = new Groq({
 
 export async function generateShitpost(commitMessages: string[]) {
   // Filter out any command-like messages
-  const filteredMessages = commitMessages.filter(msg => !msg.toLowerCase().includes('revert'));
+  const filteredMessages = commitMessages.filter(msg => typeof msg === 'string' && !msg.toLowerCase().includes('revert'));
+
   
   const prompt = `You're a witty dev who's seen it all. Create an absolutely hilarious and relatable dev shitpost based on these commit messages. Make it sarcastic memorable and something that would get tons of engagement. Focus on common dev pain points and frustrations. Keep it under 280 chars..
 Restric the use of hashtagse
