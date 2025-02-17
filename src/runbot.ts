@@ -1,33 +1,23 @@
 import { fetchCommits } from './fetchCommits';
 import { generateShitpost } from './generateShitpost';
 import { postTweet } from './postTweet';
+import { generateFallbackTweet } from './fallbackTweet';
 
-export async function runBot(owner: string, repo: string) {
+export async function runBot() {
   try {
-    // Fetch commits
-    const commitMessages = await fetchCommits(owner, repo) || [];
+    const commitMessages = await fetchCommits();
+    if (!commitMessages.length) return console.log('No commits found.');
+
     console.log('Fetched commits:', commitMessages);
-   
-    // Check for new commits today
+
     const today = new Date().toISOString().split('T')[0];
-    const newCommits = commitMessages.slice(0, 5);
-    // const newCommits = commitMessages.filter(commit => commit.includes(today));
-    if (!commitMessages) {
-      console.log('No commits fetched.');
-      return;
-    }
-    if (newCommits.length === 0) {
-      console.log('No new commits today. Skipping tweet.');
-      return;
-    }
+    const hasTodayCommit = commitMessages.some(commit => commit.includes(today));
 
-    // Generate shitpost
-    const shitpost = await generateShitpost(newCommits);
-    console.log('Generated shitpost:', shitpost);
+    const tweetContent = hasTodayCommit
+      ? await generateShitpost(commitMessages)
+      : await generateFallbackTweet();
 
-    // Post tweet
-    await postTweet(shitpost);
-    console.log('Tweet posted successfully!');
+    await postTweet(tweetContent);
   } catch (error) {
     console.error('Error running bot:', error);
   }
