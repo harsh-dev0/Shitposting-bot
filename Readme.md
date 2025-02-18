@@ -37,7 +37,7 @@ A bot to turn GitHub commits into humorous shitposts and tweet them.
 1. **Run the Bot**:
 
    ```bash
-   npx ts-node src/index.ts -r owner/repo
+   npm start
    ```
 
    - Replace `owner/repo` with the GitHub repository you want to monitor.
