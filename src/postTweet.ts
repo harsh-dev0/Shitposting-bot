@@ -1,12 +1,12 @@
-import { tokenStorage } from "./index";
+import { TwitterApi } from 'twitter-api-v2';
+import { getValidAccessToken } from './auth';
 
 export async function postTweet(text: string) {
   try {
-    if (!tokenStorage.client) {
-      throw new Error('No authenticated Twitter client found.');
-    }
+    const accessToken = await getValidAccessToken();
+    const client = new TwitterApi(accessToken);
 
-    await tokenStorage.client.v2.tweet(text);
+    await client.v2.tweet(text);
     console.log('Tweet posted successfully!');
   } catch (error) {
     console.error('Error posting tweet:', error);

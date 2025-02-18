@@ -10,7 +10,7 @@ interface CommitData {
     };
   };
 }
-const octokit = new Octokit({ auth: process.env.GITHUB_TOKEN });
+const octokit = new Octokit({ auth: process.env.GTOKEN });
 
 export async function fetchCommits() {
   try {

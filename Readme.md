@@ -26,15 +26,11 @@ A bot to turn GitHub commits into humorous shitposts and tweet them.
    ```
 
 3. **Create a `.env` File**:
-   - Store your API keys in a `.env` file in the root of your project:
-     ```env
-     GITHUB_TOKEN=your_github_token
-     TWITTER_API_KEY=your_twitter_api_key
-     TWITTER_API_SECRET=your_twitter_api_secret
-     TWITTER_ACCESS_TOKEN=your_twitter_access_token
-     TWITTER_ACCESS_SECRET=your_twitter_access_secret
-     OPENAI_API_KEY=your_openai_api_key
+   - Copy the `.env.example` file and fill in your credentials.
+     ```bash
+     cp .env.example .env
      ```
+   - Update `.env` with your API keys and tokens.
 
 ## Usage
 
@@ -53,7 +49,19 @@ A bot to turn GitHub commits into humorous shitposts and tweet them.
 
 - **GitHub Repository**: Specify the owner and repo using the `-r` option.
 - **API Keys**: Store your API keys in the `.env` file.
-- **Tweet Frequency**: Customize the frequency of tweets by setting up a cron job or scheduler.
+- **Tweet Frequency**: Customize the frequency of tweets using GitHub Actions (`.github/workflows/daily-tweet.yml`).
+
+## Environment Variables
+
+The following environment variables are required and used in `.yml`:
+
+```env
+TWITTER_CLIENT_ID=your_twitter_client_id
+TWITTER_CLIENT_SECRET=your_twitter_client_secret
+OPENAI_API_KEY=your_openai_api_key
+GTOKEN=your_google_token
+MONGODB_URI=your_mongodb_connection_string
+```
 
 ## Contributing
 
@@ -83,3 +91,15 @@ A bot to turn GitHub commits into humorous shitposts and tweet them.
    - Open a pull request against the `main` branch of the original repository.
 
 ---
+
+## `.env.example`
+
+Create a `.env` file based on the following template:
+
+```env
+TWITTER_CLIENT_ID=
+TWITTER_CLIENT_SECRET=
+OPENAI_API_KEY=
+GTOKEN=
+MONGODB_URI=
+```
