@@ -27,9 +27,6 @@ A bot to turn GitHub commits into humorous shitposts and tweet them.
 
 3. **Create a `.env` File**:
    - Copy the `.env.example` file and fill in your credentials.
-     ```bash
-     cp .env.example .env
-     ```
    - Update `.env` with your API keys and tokens.
 
 ## Usage
@@ -40,16 +37,14 @@ A bot to turn GitHub commits into humorous shitposts and tweet them.
    npm start
    ```
 
-   - Replace `owner/repo` with the GitHub repository you want to monitor.
-
 2. **Verify**:
    - Ensure the bot fetches commits, generates a shitpost, and posts a tweet.
 
 ## Configuration
 
-- **GitHub Repository**: Specify the owner and repo using the `-r` option.
 - **API Keys**: Store your API keys in the `.env` file.
-- **Tweet Frequency**: Customize the frequency of tweets using GitHub Actions (`.github/workflows/daily-tweet.yml`).
+- **Tweet Frequency**: Customize the frequency of tweets using GitHub Actions (`.github/workflows/tweet.yml`).
+- **Setup and leave**: When you clone this repository and push changes on your github and add env secrets to Github Actions, the bot will bet set up to operate. Make sure to check workflow to see if it working or no.
 
 ## Environment Variables
 
