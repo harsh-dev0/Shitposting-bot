@@ -21,11 +21,13 @@ jobs:
       - name: Install dependencies
         run: npm install
 
+      - name: Load Environment Variables
+        run: |
+          echo "TWITTER_CLIENT_SECRET=${{ secrets.TWITTER_CLIENT_SECRET }}" >> $GITHUB_ENV
+          echo "TWITTER_CLIENT_ID=${{ secrets.TWITTER_CLIENT_ID }}" >> $GITHUB_ENV
+          echo "OPENAI_API_KEY=${{ secrets.OPENAI_API_KEY }}" >> $GITHUB_ENV
+          echo "GTOKEN=${{ secrets.GTOKEN }}" >> $GITHUB_ENV
+          echo "MONGODB_URI=${{ secrets.MONGODB_URI }}" >> $GITHUB_ENV
+
       - name: Run bot
         run: npm start
-        env:
-          TWITTER_CLIENT_SECRET: ${{ secrets.TWITTER_CLIENT_SECRET }}
-          TWITTER_CLIENT_ID: ${{ secrets.TWITTER_CLIENT_ID }}
-          OPENAI_API_KEY: ${{ secrets.OPENAI_API_KEY }}
-          GTOKEN: ${{ secrets.GTOKEN }}
-          MONGODB_URI: ${{secrets.MONGODB_URI}}
