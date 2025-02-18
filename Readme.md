@@ -44,7 +44,7 @@ A bot to turn GitHub commits into humorous shitposts and tweet them.
 
 - **API Keys**: Store your API keys in the `.env` file.
 - **Tweet Frequency**: Customize the frequency of tweets using GitHub Actions (`.github/workflows/tweet.yml`).
-- **Setup and leave**: When you clone this repository and push changes on your github and add env secrets to Github Actions, the bot will bet set up to operate. Make sure to check workflow to see if it working or no.
+- **Setup and leave**: When you clone this repository and push changes on your github and add env secrets to Github Actions, the bot will be set up to operate. Make sure to check Github workflow to see if it is working or no.
 
 ## Environment Variables
 
