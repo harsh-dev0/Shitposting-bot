@@ -2,7 +2,14 @@ import { Octokit } from 'octokit';
 import dotenv from 'dotenv';
 
 dotenv.config();
-
+interface CommitData {
+  commit: {
+    message: string;
+    author: {
+      date: string;
+    };
+  };
+}
 const octokit = new Octokit({ auth: process.env.GITHUB_TOKEN });
 
 export async function fetchCommits() {
@@ -12,7 +19,6 @@ export async function fetchCommits() {
     if (!repos.data.length) {
       throw new Error('No repositories found.');
     }
-
     const today = new Date();
     today.setUTCHours(0, 0, 0, 0);
 
@@ -32,7 +38,7 @@ export async function fetchCommits() {
       per_page: 5,
     });
 
-    commitsToday.push(...commits.data.map(commit => ({
+    commitsToday.push(...commits.data.map((commit: CommitData) => ({
       message: commit.commit.message,
       date: commit.commit.author.date
     })));

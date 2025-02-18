@@ -1,5 +1,3 @@
-// index.ts
-import { Command } from 'commander';
 import express, { Request, Response } from 'express';
 import { TwitterApi } from 'twitter-api-v2';
 import dotenv from 'dotenv';
@@ -31,7 +29,7 @@ const twitterClient = new TwitterApi({
 
 const callbackURL = 'http://127.0.0.1:5000/callback';
 
-// Clear all tokens and start fresh auth
+// Clearing all tokens and start fresh auth
 app.get('/auth/twitter', async (req: Request, res: Response) => {
   try {
     // Reset all stored data
@@ -56,7 +54,7 @@ app.get('/auth/twitter', async (req: Request, res: Response) => {
   }
 });
 
-app.get('/callback', async (req: Request, res: Response) => {
+app.get('/callback', async (req: Request, res: Response): Promise<any> => {
   const { state, code } = req.query;
 
   if (!code || !state || !tokenStorage.state || state !== tokenStorage.state) {
@@ -75,16 +73,11 @@ app.get('/callback', async (req: Request, res: Response) => {
     tokenStorage.accessToken = accessToken;
     tokenStorage.refreshToken = refreshToken;
 
-    // Clean up auth data
     delete tokenStorage.codeVerifier;
     delete tokenStorage.state;
 
-    // Verify credentials
     const user = await client.v2.me();
     console.log('Authenticated as:', user.data);
-
-    // Debug log
-    console.log('Client set in tokenStorage:', tokenStorage.client);
 
     await runBot();
 
@@ -104,4 +97,3 @@ app.listen(port, () => {
   console.log(`\nVisit http://127.0.0.1:${port}/auth/twitter to authenticate`);
 });
 
-// postTweet.ts

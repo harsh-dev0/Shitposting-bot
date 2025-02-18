@@ -20,7 +20,7 @@ ${filteredMessages.join("\n")}
 Make it sound natural and conversational - like something a real developer would tweet. Don't be afraid to be dramatic or exaggerated for effect. Also make it insightful if possible add learnings`
 
   try {
-    console.log("Generating tweet with prompt:", prompt);
+    console.log("Generating ShitPost.");
 
     const completion = await groq.chat.completions.create({
       model: "llama-3.3-70b-versatile",
@@ -32,12 +32,10 @@ Make it sound natural and conversational - like something a real developer would
 
     let response = completion.choices?.[0]?.message?.content || "No response";
     
-    // Remove commas and quotation marks from the response
     response = response.replace(/["]/g, '');
     
     console.log("Generated response:", response);
 
-    // Ensure the response is within Twitter's character limit
     if (response.length > 280) {
       console.warn("Response exceeds 280 characters - truncating...");
       return response.substring(0, 277) + "...";

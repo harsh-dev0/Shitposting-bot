@@ -1,7 +1,5 @@
 import { tokenStorage } from "./index";
 
-
-
 export async function postTweet(text: string) {
   try {
     if (!tokenStorage.client) {
