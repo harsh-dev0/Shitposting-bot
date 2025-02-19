@@ -1,6 +1,6 @@
 import express, { Request, Response } from 'express';
 import dotenv from 'dotenv';
-import { twitterClient, callbackURL } from './auth';
+import { twitterClient, callbackURL, getValidAccessToken } from './auth';
 import { connectToMongo, tokenCollection } from './db/mongodb';
 import { runBot } from './runbot';
 
@@ -10,19 +10,7 @@ const app = express();
 app.use(express.json());
 const port = 5000;
 
-// Function to check if a valid access token exists
-const getValidAccessToken = async () => {
-  if (!tokenCollection) {
-    console.error('MongoDB is not initialized yet!');
-    return null;
-  }
-  
-  const storedToken = await tokenCollection.findOne({});
-  if (storedToken && storedToken.accessToken && storedToken.expiresAt > Date.now()) {
-    return storedToken.accessToken;
-  }
-  return null;
-};
+
 
 // Route to start Twitter OAuth
 app.get('/auth/twitter', async (req: Request, res: Response): Promise<any> => {

@@ -18,7 +18,7 @@ export async function getValidAccessToken() {
   if (!storedToken) {
     throw new Error('No stored authentication tokens found.');
   }
-
+  
   if (Date.now() >= storedToken.expiresAt) {
     console.log('Access token expired, attempting refresh...');
     return await refreshAccessToken(storedToken.refreshToken);
