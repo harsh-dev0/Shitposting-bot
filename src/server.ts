@@ -11,8 +11,6 @@ app.use(express.json());
 const port = 5000;
 
 
-
-// Route to start Twitter OAuth
 app.get('/auth/twitter', async (req: Request, res: Response): Promise<any> => {
   try {
     const accessToken = await getValidAccessToken();
@@ -26,7 +24,6 @@ app.get('/auth/twitter', async (req: Request, res: Response): Promise<any> => {
       scope: ['tweet.read', 'tweet.write', 'users.read', 'offline.access']
     });
 
-    // Store OAuth state & verifier in MongoDB
     await tokenCollection.insertOne({ codeVerifier, state });
 
     res.redirect(url);
@@ -36,7 +33,6 @@ app.get('/auth/twitter', async (req: Request, res: Response): Promise<any> => {
   }
 });
 
-// OAuth callback route
 app.get('/callback', async (req: Request, res: Response): Promise<any> => {
   try {
     const { state, code } = req.query as { state?: string; code?: string };
@@ -45,14 +41,12 @@ app.get('/callback', async (req: Request, res: Response): Promise<any> => {
       return res.status(400).send('Missing state or code parameters.');
     }
 
-    // Retrieve stored state and verifier from MongoDB
     const storedAuth = await tokenCollection.findOne({ state });
 
     if (!storedAuth || state !== storedAuth.state) {
       return res.status(400).send('Invalid authentication callback');
     }
 
-    // Exchange code for access token
     const { client, accessToken, refreshToken } = await twitterClient.loginWithOAuth2({
       code,
       codeVerifier: storedAuth.codeVerifier,
@@ -62,7 +56,6 @@ app.get('/callback', async (req: Request, res: Response): Promise<any> => {
     const expiresIn = 7200 * 1000; // 2 hours
     const expiresAt = Date.now() + expiresIn;
 
-    // Store new tokens
     await tokenCollection.updateOne(
       { state },
       { $set: { accessToken, refreshToken, expiresAt } },
@@ -71,7 +64,6 @@ app.get('/callback', async (req: Request, res: Response): Promise<any> => {
 
     console.log('✅ Authentication successful!');
 
-    // Run bot after successful authentication
     await runBot();
 
     res.send('Authentication successful! You can close this window.');
@@ -81,7 +73,6 @@ app.get('/callback', async (req: Request, res: Response): Promise<any> => {
   }
 });
 
-// Start the server **only after MongoDB is connected**
 const startServer = async () => {
   try {
     await connectToMongo();
@@ -90,7 +81,6 @@ const startServer = async () => {
     app.listen(port, async () => {
       console.log(`\n🚀 Server running at http://127.0.0.1:${port}`);
 
-      // Check for an existing token **after MongoDB is ready**
       const accessToken = await getValidAccessToken();
 
       if (accessToken) {
@@ -102,7 +92,7 @@ const startServer = async () => {
     });
   } catch (err) {
     console.error('❌ Failed to connect to MongoDB:', err);
-    process.exit(1); // Stop the server if MongoDB fails to connect
+    process.exit(1);
   }
 };
 

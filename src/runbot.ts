@@ -19,10 +19,10 @@ export async function runBot() {
     await postTweet(tweetContent);
 
     console.log('🛑 Bot execution finished. Exiting process...');
-    process.exit(0); // Stops the Node.js process after tweeting
+    process.exit(0);
   } catch (error) {
     console.error('❌ Error running bot:', error);
-    process.exit(1); // Exit with an error status if something fails
+    process.exit(1);
   }
 }
 

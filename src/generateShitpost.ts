@@ -8,7 +8,6 @@ const groq = new Groq({
 });
 
 export async function generateShitpost(commitMessages: string[]) {
-  // Filter out any command-like messages
   const filteredMessages = commitMessages.filter(msg => typeof msg === 'string' && !msg.toLowerCase().includes('revert'));
 
   

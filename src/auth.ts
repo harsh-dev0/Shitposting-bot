@@ -11,7 +11,6 @@ const twitterClient = new TwitterApi({
 
 const callbackURL = 'http://127.0.0.1:5000/callback';
 
-// Function to check token expiration
 export async function getValidAccessToken() {
   const storedToken = await tokenCollection.findOne({});
 
@@ -27,7 +26,6 @@ export async function getValidAccessToken() {
   return storedToken.accessToken;
 }
 
-// Function to refresh the token
 export async function refreshAccessToken(refreshToken: string) {
   try {
     const { client, accessToken, refreshToken: newRefreshToken } = await twitterClient.refreshOAuth2Token(refreshToken);
