@@ -1,4 +1,4 @@
-# Twitter Bot
+# Shitposting Bot
 
 A bot to turn GitHub commits into humorous shitposts and tweet them.
 
@@ -7,6 +7,7 @@ A bot to turn GitHub commits into humorous shitposts and tweet them.
 - [Setup](#setup)
 - [Usage](#usage)
 - [Configuration](#configuration)
+- [Environment Variables](#environment-variables)
 - [Contributing](#contributing)
 - [License](#license)
 
@@ -44,7 +45,7 @@ A bot to turn GitHub commits into humorous shitposts and tweet them.
 
 - **API Keys**: Store your API keys in the `.env` file.
 - **Tweet Frequency**: Customize the frequency of tweets using GitHub Actions (`.github/workflows/tweet.yml`).
-- **Setup and leave**: When you clone this repository and push changes on your github and add env secrets to Github Actions, the bot will be set up to operate. Make sure to check Github workflow to see if it is working or no.
+- **Setup and Leave**: Once you push your changes to GitHub and add your environment secrets to GitHub Actions, the bot will be set up to operate. Make sure to check the GitHub workflow to ensure it’s working correctly.
 
 ## Environment Variables
 
@@ -53,10 +54,12 @@ The following environment variables are required and used in `.yml`:
 ```env
 TWITTER_CLIENT_ID=your_twitter_client_id
 TWITTER_CLIENT_SECRET=your_twitter_client_secret
-OPENAI_API_KEY=your_openai_api_key
+GROQ_API_KEY=your_groq_api_key
 GTOKEN=your_google_token
 MONGODB_URI=your_mongodb_connection_string
 ```
+
+**Note:** This bot uses the **Groq API** for AI-powered tweet generation. Make sure to obtain an API key from Groq and update the `GROQ_API_KEY` variable accordingly.
 
 ## Contributing
 
@@ -94,7 +97,7 @@ Create a `.env` file based on the following template:
 ```env
 TWITTER_CLIENT_ID=
 TWITTER_CLIENT_SECRET=
-OPENAI_API_KEY=
+GROQ_API_KEY=
 GTOKEN=
 MONGODB_URI=
 ```

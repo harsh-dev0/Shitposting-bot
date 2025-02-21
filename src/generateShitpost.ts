@@ -4,7 +4,7 @@ import dotenv from "dotenv";
 dotenv.config();
 
 const groq = new Groq({
-  apiKey: process.env.OPENAI_API_KEY,
+  apiKey: process.env.GROQ_API_KEY,
 });
 
 export async function generateShitpost(commitMessages: string[]) {
@@ -27,11 +27,11 @@ export async function generateShitpost(commitMessages: string[]) {
   \`\`\`
   
   ### **Examples of styles to explore:**  
-  - **Exaggeration:** "Commit: 'Fixed minor bug.' Translation: I just rewrote half the codebase and discovered three existential crises."  
-  - **Irony:** "Commit: 'Refactored for clarity.' Reality: I will NEVER understand this code again."  
-  - **Unexpected Absurdity:** "Commit: 'Updated README.' You ever tweak a single sentence and feel like a published author?"  
-  - **Sarcastic Honesty:** "Commit: 'Added comments.' AKA, I translated my nonsense into *legible* nonsense."  
-  - **Unhinged Chaos:** "Commit: 'Final final v2 fix.' If you know, you know."  
+  - **Exaggeration:**I just rewrote half the codebase and discovered three existential crises."  
+  - **Irony:**I will NEVER understand this code again."  
+  - **Unexpected Absurdity:** You ever tweak a single sentence and feel like a published author?"  
+  - **Sarcastic Honesty:** I translated my nonsense into *legible* nonsense."  
+  - **Unhinged Chaos:** If you know, you know."  
   
   Each tweet should be **snappy, unpredictable, and entertaining.** Surprise me. 🚀`  
   
