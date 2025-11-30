@@ -55,7 +55,7 @@ The following environment variables are required and used in `.yml`:
 TWITTER_CLIENT_ID=your_twitter_client_id
 TWITTER_CLIENT_SECRET=your_twitter_client_secret
 GROQ_API_KEY=your_groq_api_key
-GTOKEN=your_google_token
+GTOKEN=your_github_token
 MONGODB_URI=your_mongodb_connection_string
 ```
 
